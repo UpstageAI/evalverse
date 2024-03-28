@@ -1,0 +1,54 @@
+[tool.poetry]
+name = "evalverse"
+version = "0.0.1"
+description = "The Universe of Evaluation. All about the evaluation for LLMs."
+authors = ["Evalverse <evalverse@upstage.ai>"]
+license = "Apache License 2.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+### Evalverse
+python = ">=3.9,<3.11"
+python-dotenv = "^1.0.1"
+pre-commit = "^3.7.0"
+pandas = "^2.2.1"
+
+### Evalverse Reporter
+slack-sdk = "^3.27.1"
+slack-bolt = "^1.18.1"
+gitpython = "^3.1.42"
+plotly = "^5.20.0"
+kaleido = "0.2.1"
+
+### lm-evaluation-harness & Common
+lm-eval = "0.4.2"
+transformers = "4.37.2"
+vllm = "0.3.1"
+ray = "^2.10.0"
+
+### FastChat
+fschat = { path = "evalverse/submodules/FastChat" }
+openai = "<1"
+anthropic = ">=0.3"
+
+### IFEval
+absl-py = "^2.1.0"
+langdetect = "^1.0.9"
+immutabledict = "^4.2.0"
+
+### EQ-Bench
+gspread = "^6.1.0"
+oauth2client = "^4.1.3"
+firebase-admin = "^6.5.0"
+tensorboardx = "^2.6.2.2"
+hf-transfer = "^0.1.6"
+scipy = "^1.12.0"
+pexpect = "^4.9.0"
+
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

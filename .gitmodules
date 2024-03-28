@@ -1,0 +1,12 @@
+[submodule "evalverse/submodules/FastChat"]
+	path = evalverse/submodules/FastChat
+	url = git@github.com:UpstageAI/evalverse-FastChat
+	branch = main
+[submodule "evalverse/submodules/IFEval"]
+	path = evalverse/submodules/IFEval
+	url = git@github.com:UpstageAI/evalverse-IFEval.git
+	branch = main
+[submodule "evalverse/submodules/EQBench"]
+	path = evalverse/submodules/EQBench
+	url = git@github.com:UpstageAI/evalverse-EQBench.git
+	branch = main

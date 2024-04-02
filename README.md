@@ -12,7 +12,7 @@ Upstage Solar is powered by Evalverse! Try at Upstage [Console](https://console.
 [Docs](https://evalverse.gitbook.io/evalverse-docs) • [Examples](https://github.com/UpstageAI/evalverse/tree/main/examples) • [FAQ](https://evalverse.gitbook.io/evalverse-docs/documents/faqs) • [Contribution Guide](https://github.com/UpstageAI/evalverse/blob/main/contribution/CONTRIBUTING.md)  • [Contact](mailto:evalverse@upstage.ai)  • [Discord](https://discord.gg/D3bBj66K) • [Paper](https://arxiv.org/abs/2404.00943)
 </div>
 
-![Overview of Evalverse](./assets/overview.png)
+<div align="center"><img alt="overview" src="assets/overview.png" width=500></div>
 
 
 ## Welcome to Evalverse!
@@ -33,7 +33,7 @@ Evalverse is a freely accessible, open-source project designed to support your L
 - **LLM evaluation report**: Obtain comprehensive, no-code reports from Evalverse. Request with a simple command -`Report!`-, select the model and evaluation criteria, and receive detailed reports with scores, rankings, and visuals, all generated from the stored score database.
 
 
-If you want to know more about Dataverse, please checkout our [docs](https://evalverse.gitbook.io/evalverse-docs). </br>
+If you want to know more about Evalverse, please checkout our [docs](https://evalverse.gitbook.io/evalverse-docs). </br>
 By clicking below image, it'll take you to a short intro video!
 [![Brief Introduction](./assets/intro-evalverse.png)](https://www.youtube.com/watch?v=-VviAutjpgM)
 </br>
@@ -112,14 +112,20 @@ import evalverse as ev
 
 db_path = "./db"
 output_path = "./results"
-evaluator = ev.Reporter(db_path=db_path, output_path=output_path)
+reporter = ev.Reporter(db_path=db_path, output_path=output_path)
 
 reporter.update_db(save=True)
 
-model_list = ["SOLAR-10.7B-Instruct-v1.0"]
-benchmark_list = ["h6_en", "mt_bench", "ifeval", "eq_bench"]
+model_list = ["SOLAR-10.7B-Instruct-v1.0", "Llama-2-7b-chat-hf"]
+benchmark_list = ["h6_en"]
 reporter.run(model_list=model_list, benchmark_list=benchmark_list)
 ```
+<img alt="architecture" src="assets/sample_report.png" width=700>
+
+|                     Model | Ranking | total_avg | H6-ARC | H6-Hellaswag | H6-MMLU | H6-TruthfulQA | H6-Winogrande | H6-GSM8k |
+|--------------------------:|--------:|----------:|-------:|-------------:|--------:|--------------:|--------------:|---------:|
+| SOLAR-10.7B-Instruct-v1.0 |       1 |     74.62 |  71.33 |        88.19 |   65.52 |         71.72 |         83.19 |    67.78 |
+|        Llama-2-7b-chat-hf |       2 |     53.51 |  53.16 |        78.59 |   47.38 |         45.31 |         72.69 |    23.96 |
 
 </br>
 

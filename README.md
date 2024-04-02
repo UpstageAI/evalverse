@@ -10,7 +10,7 @@ The Universe of Evaluation.
 All about the evaluation for LLMs.  </br>
 Upstage Solar is powered by Evalverse! Try at Upstage [Console](https://console.upstage.ai/)!
 
-[Docs](https://evalverse.gitbook.io/evalverse-docs) • [Examples](https://github.com/UpstageAI/evalverse/tree/main/tutorials) • [FAQ](https://evalverse.gitbook.io/evalverse-docs/documents/faqs) • [Contribution Guide]()  • [Contact](mailto:evalverse@upstage.ai)  • [Discord]() • [Paper]()
+[Docs](https://evalverse.gitbook.io/evalverse-docs) • [Examples](https://github.com/UpstageAI/evalverse/tree/main/tutorials) • [FAQ](https://evalverse.gitbook.io/evalverse-docs/documents/faqs) • [Contribution Guide]()  • [Contact](mailto:evalverse@upstage.ai)  • [Discord]() • [Paper](https://arxiv.org/abs/2404.00943)
 </div>
 
 <div align="center"><img alt="overview" src="assets/overview.png" width=500></div>
@@ -97,16 +97,16 @@ Evalverse is an open-source project orchestrated by the **Data-Centric LLM Team*
 ## 🌌 License
 Evalverse is completely freely-accessible open-source and licensed under the Apache License 2.0.
 
-
 ## 🌌 Citation
-> If you want to cite our 🌌 Evalverse project, feel free to use the following bibtex.
+If you want to cite our 🌌 Evalverse project, feel free to use the following bibtex. You can check our paper via [link](https://arxiv.org/abs/2404.00943).
 
 ```bibtex
 @misc{evalverse,
   title = {Evalverse},
   author = {Jihoo Kim, Wonho Song, Dahyun Kim, Yoonsoo Kim, Yungi Kim, Chanjun Park},
   year = {2024},
-  publisher = {GitHub, Upstage AI},
-  howpublished = {\url{https://github.com/UpstageAI/evalverse}},
+  eprint={2404.00943},
+  archivePrefix={arXiv},
+  primaryClass={cs.CL}
 }
 ```

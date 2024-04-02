@@ -80,8 +80,8 @@ Here is a CLI script that produces the same result as the above code:
 cd evalverse
 
 python3 evaluator.py \
---h6_en \
---ckpt_path upstage/SOLAR-10.7B-Instruct-v1.0
+  --h6_en \
+  --ckpt_path upstage/SOLAR-10.7B-Instruct-v1.0
 ```
 ### 🌠 Report
 Currently, generating a report is only available through the library. We will work on a Command Line Interface (CLI) version as soon as possible.
@@ -91,14 +91,20 @@ import evalverse as ev
 
 db_path = "./db"
 output_path = "./results"
-evaluator = ev.Reporter(db_path=db_path, output_path=output_path)
+reporter = ev.Reporter(db_path=db_path, output_path=output_path)
 
 reporter.update_db(save=True)
 
-model_list = ["SOLAR-10.7B-Instruct-v1.0"]
-benchmark_list = ["h6_en", "mt_bench", "ifeval", "eq_bench"]
+model_list = ["SOLAR-10.7B-Instruct-v1.0", "Llama-2-7b-chat-hf"]
+benchmark_list = ["h6_en"]
 reporter.run(model_list=model_list, benchmark_list=benchmark_list)
 ```
+<img alt="architecture" src="assets/sample_report.png" width=700>
+
+|                     Model | Ranking | total_avg | H6-ARC | H6-Hellaswag | H6-MMLU | H6-TruthfulQA | H6-Winogrande | H6-GSM8k |
+|--------------------------:|--------:|----------:|-------:|-------------:|--------:|--------------:|--------------:|---------:|
+| SOLAR-10.7B-Instruct-v1.0 |       1 |     74.62 |  71.33 |        88.19 |   65.52 |         71.72 |         83.19 |    67.78 |
+|        Llama-2-7b-chat-hf |       2 |     53.51 |  53.16 |        78.59 |   47.38 |         45.31 |         72.69 |    23.96 |
 
 </br>
 

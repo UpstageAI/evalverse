@@ -85,7 +85,7 @@ But the body is optional.
     - `STYLE`: changes that do not affect the meaning of the code (ex. white-space, line length)
     - `TEST`: add additional testing
     - `DEL`: remove code or files
-    - `RELEASE`: release new version of dataverse
+    - `RELEASE`: release new version of evalverse
     - `OTHER`: anything not covered above (not recommended)
 - Use the present tense ("Add feature" not "Added feature")
 - Do not end the subject line with a punctuation

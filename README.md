@@ -152,7 +152,7 @@ We currently support four evaluation methods. If you have suggestions for new me
 
 ## 🌌 Contributors
 <a href="https://github.com/UpstageAI/evalverse/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=UpstageAI/evalverse" />
+  <img src="https://contrib.rocks/image?repo=UpstageAI/evalverse"/>
 </a>
 
 

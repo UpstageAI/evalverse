@@ -48,7 +48,7 @@ Before diving into coding, do take a moment to familiarize yourself with our cod
 2. Clone your fork to your local disk.
 3. Create a new branch to hold your develompment changes. </br>
 It's not required to adhere strictly to the branch naming example provided; consider it a mild suggestion.
-```
+```bash
 git checkout -b {prefix}/{issue-number}-{description}
 ```
 4. Set up a development environment

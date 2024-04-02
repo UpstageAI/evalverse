@@ -29,10 +29,10 @@ And if there's a shiny new feature you're dreaming of, don't be shy—head over 
 
 
 ## __Report a Bug / Request New Feature / Suggest Enhancements__
-Please opne an issue whenever you find a bug or have an idea to enhance _Evalverse_. Maintainers will label it or leave comment on it as soon as they check the issue. Issues labeled as `Open for contribution` mean they are open for contribution.
+Please open an issue whenever you find a bug or have an idea to enhance _Evalverse_. Maintainers will label it or leave comment on it as soon as they check the issue. Issues labeled as `Open for contribution` mean they are open for contribution.
 
 ## __Fix a Bug / Add New Feature / Improve Existing Feature__
-If you have a particular roadmap, goals, or new feature, share it via issue. already fixed a bug or have new feature that enhacnes _Evalverse_, you can jump on to fourth step which is opening pull requests. Please note that when you open pull requests without opening an issue or maintainers' check, it can be declined if it does not aligh with philosophy of _Evalverse_.
+If you have a particular roadmap, goals, or new feature, share it via issue. already fixed a bug or have new feature that enhances _Evalverse_, you can jump on to fourth step which is opening pull requests. Please note that when you open pull requests without opening an issue or maintainers' check, it can be declined if it does not aligh with philosophy of _Evalverse_.
 
 ### __1️⃣ Check issues labeled as__ `Open for contribution`
 You can find issues waiting for your contribution by filtering label with `Open for contribution`. This label does not stand alone. It is always with `Bug`, `Docs` or `Enhancement`. Issues with `Critical` or `ASAP` label are more urgent. 

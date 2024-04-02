@@ -1,8 +1,10 @@
+"""
+Copyright (c) 2024-present Upstage Co., Ltd.
+Apache-2.0 license
+"""
 import os
 
-from evalverse.utils import print_command
-
-EVALVERSE_PATH = os.path.dirname(os.path.abspath(__file__))
+from evalverse.utils import EVALVERSE_MODULE_PATH, print_command
 
 
 def lm_evaluation_harness(
@@ -77,7 +79,7 @@ def fastchat_llm_judge(
     else:
         model_list = model_id
 
-    eval_code_path = os.path.join(EVALVERSE_PATH, "submodules/FastChat/fastchat/llm_judge")
+    eval_code_path = os.path.join(EVALVERSE_MODULE_PATH, "submodules/FastChat/fastchat/llm_judge")
 
     answer_path = os.path.join(output_path, model_id, "mt_bench", "model_answer")
     answer_file = os.path.join(answer_path, f"{model_id}.jsonl")
@@ -87,8 +89,8 @@ def fastchat_llm_judge(
 
     gen_answer_cmd = f"python3 gen_model_answer.py --model-path {model_path} --model-id {model_id} --bench-name {mt_bench_name} --answer-file {answer_file} --num-gpus-per-model {num_gpus_per_model} --num-gpus-total {num_gpus_total}"
     gen_judgment_cmd = f"echo -e '\n' | python3 gen_judgment.py --model-list {model_list} --bench-name {mt_bench_name} --model-answer-dir {answer_path} --model-judgement-dir {judgement_path} --judge-model {judge_model} --parallel {parallel_api}"
-    save_result_cmd = f"python3 show_result.py --model-list {model_list} --bench-name {mt_bench_name} --judge-model {judge_model} > {os.path.join(output_path, model_id, 'mt_bench', 'scores.txt')}"
-    show_result_cmd = f"python3 show_result.py --model-list {model_list} --bench-name {mt_bench_name} --judge-model {judge_model}"
+    save_result_cmd = f"python3 show_result.py --model-list {model_list} --bench-name {mt_bench_name} --judge-model {judge_model} --input-file {judgement_file} > {os.path.join(output_path, model_id, 'mt_bench', 'scores.txt')}"
+    show_result_cmd = f"python3 show_result.py --model-list {model_list} --bench-name {mt_bench_name} --judge-model {judge_model} --input-file {judgement_file}"
 
     eval_cmd = f"cd {eval_code_path}"
     if not os.path.exists(answer_file):
@@ -110,7 +112,7 @@ def instruction_following_eval(
     devices="0",
     output_path="../results",
 ):
-    eval_code_path = os.path.join(os.path.join(EVALVERSE_PATH, "submodules/IFEval"))
+    eval_code_path = os.path.join(os.path.join(EVALVERSE_MODULE_PATH, "submodules/IFEval"))
 
     eval_cmd = f"""
     cd {eval_code_path} && python3 inst_eval.py \
@@ -140,7 +142,7 @@ def eq_bench(
 ):
     assert gpu_per_proc == 1, "Currently only supports 1 gpu per process"
 
-    eval_code_path = os.path.join(os.path.join(EVALVERSE_PATH, "submodules/EQBench"))
+    eval_code_path = os.path.join(os.path.join(EVALVERSE_MODULE_PATH, "submodules/EQBench"))
     single_eval_code = f"""
     CUDA_VISIBLE_DEVICES={devices} python3 eq-bench.py --model_name {model_name} --prompt_type {prompt_type} \
         --model_path {model_path} --quantization {quantization} --n_iterations {n_iterations} \

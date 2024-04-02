@@ -1,3 +1,7 @@
+"""
+Copyright (c) 2024-present Upstage Co., Ltd.
+Apache-2.0 license
+"""
 import json
 import logging
 import os
@@ -7,11 +11,12 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 
+EVALVERSE_MODULE_PATH = os.path.dirname(os.path.abspath(__file__))
+EVALVERSE_DB_PATH = os.path.join(os.path.dirname(EVALVERSE_MODULE_PATH), "db")
+EVALVERSE_OUTPUT_PATH = os.path.join(os.path.dirname(EVALVERSE_MODULE_PATH), "results")
 EVALVERSE_LOG_FORMAT = (
     "[%(asctime)s][%(levelname)s][evalverse - %(filename)s:%(lineno)d] >> %(message)s"
 )
-
-H6_BENCHMARKS = ["ARC", "Hellaswag", "MMLU", "TruthfulQA", "Winogrande", "GSM8k"]
 
 
 def print_command(command, only_cmd=False):
@@ -37,7 +42,7 @@ def get_logger(log_path=None):
     return logger
 
 
-def save_figure(score_df, benchmarks_list, figure_path):
+def get_figure(score_df, benchmarks_list, figure_path=None, save=False):
     scores = []
     for b in benchmarks_list:
         for m, n in score_df[["Model", b]].values:
@@ -56,26 +61,10 @@ def save_figure(score_df, benchmarks_list, figure_path):
         title="LLM Evaluation Report (by Evalverse)",
         width=800,
     )
-    fig.write_image(figure_path, scale=2)
-
-
-def update_db(output_path="../results", db_path="./db", git_pull=False):
-    if git_pull:
-        import git
-
-        repo = git.Repo("../")
-        repo.remotes.origin.pull()
-
-    model_list = sorted(os.listdir(output_path), key=str.lower)
-    bench_list = H6_BENCHMARKS
-
-    values = []
-    for model_name in model_list:
-        h6_en_scores = get_h6_en_scores(f"../results/{model_name}/h6_en")
-        values.append([model_name] + h6_en_scores)
-
-    score_df = pd.DataFrame(values, columns=["Model"] + bench_list)
-    score_df.to_csv(os.path.join(db_path, "score_df.csv"), index=False)
+    if save:
+        fig.write_image(figure_path, scale=2)
+    else:
+        fig.show()
 
 
 def get_h6_en_scores(exp_path, stderr=False):
@@ -123,3 +112,52 @@ def get_h6_en_scores(exp_path, stderr=False):
     score_list = list(np.round((np.array(score_list) * 100), 2))
 
     return score_list
+
+
+def get_mt_bench_scores(model_id, question_path, judgement_path):
+    question_df = pd.read_json(question_path, lines=True)
+    judgement_df = pd.read_json(judgement_path, lines=True)
+
+    df = judgement_df[["question_id", "model", "score", "turn"]]
+    df = df[(df["model"] == model_id) & (df["score"] != -1)]
+    df = df.merge(question_df[["question_id", "category"]], how="left")
+    df = df[["category", "score"]].groupby(["category"]).mean()
+    df = df.sort_values("category")
+
+    score_list = df.score.values.tolist()
+    score_list = list(np.round((np.array(score_list) * 10), 2))
+
+    return score_list
+
+
+def get_ifeval_scores(score_txt_file):
+    score_list = []
+    with open(score_txt_file, "r") as file:
+        content = file.read()
+
+    pattern = r"(prompt-level|instruction-level):\s([\d.]+)"
+    matches = re.findall(pattern, content)
+
+    for _, score in matches:
+        score_list.append(float(score))
+    score_list = list(np.round((np.array(score_list) * 100), 2))
+
+    return score_list
+
+
+def get_eqbench_score(eqbench_results_json):
+    with open(eqbench_results_json, "r") as f:
+        data = json.load(f)
+
+    final_score = data[list(data.keys())[0]]["iterations"]["1"]["benchmark_results_fullscale"][
+        "final_score"
+    ]
+    score_list = [final_score]
+
+    return score_list
+
+
+if __name__ == "__main__":
+    print(f"EVALVERSE_MODULE_PATH: {EVALVERSE_MODULE_PATH}")
+    print(f"EVALVERSE_DB_PATH: {EVALVERSE_DB_PATH}")
+    print(f"EVALVERSE_OUTPUT_PATH: {EVALVERSE_OUTPUT_PATH}")

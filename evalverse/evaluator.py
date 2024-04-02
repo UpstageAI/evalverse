@@ -1,3 +1,7 @@
+"""
+Copyright (c) 2024-present Upstage Co., Ltd.
+Apache-2.0 license
+"""
 import logging
 import os
 import time
@@ -10,10 +14,8 @@ from evalverse.connector import (
     instruction_following_eval,
     lm_evaluation_harness,
 )
-from evalverse.utils import EVALVERSE_LOG_FORMAT, get_logger
-
-AVAILABLE_BENCHMARKS = ["h6_en", "mt_bench", "ifeval", "eq_bench"]
-
+from evalverse.reporter import AVAILABLE_BENCHMARKS
+from evalverse.utils import EVALVERSE_LOG_FORMAT, EVALVERSE_OUTPUT_PATH, get_logger
 
 logging.basicConfig(format=EVALVERSE_LOG_FORMAT, datefmt="%Y-%m-%d %H:%M:%S", level=logging.INFO)
 
@@ -28,7 +30,7 @@ class Evaluator:
 
         # Common Args
         parser.add_argument("--ckpt_path", type=str, default="upstage/SOLAR-10.7B-Instruct-v1.0")
-        parser.add_argument("--output_path", type=str, default=f"{os.getcwd()}/results")
+        parser.add_argument("--output_path", type=str, default=EVALVERSE_OUTPUT_PATH)
         parser.add_argument("--model_name", type=str, help="using in save_path")
         parser.add_argument("--use_fast_tokenizer", action="store_true", default=False)
         parser.add_argument("--devices", type=str, default="0", help="The size of data parallel.")
@@ -132,7 +134,7 @@ class Evaluator:
 
         return args
 
-    def run(self, model=None, benchmark=None, **kwargs):
+    def run(self, model: str = None, benchmark: str | list = None, **kwargs):
         # update args
         args = self.get_args()
         args = self.update_args(args, model, benchmark, kwargs)

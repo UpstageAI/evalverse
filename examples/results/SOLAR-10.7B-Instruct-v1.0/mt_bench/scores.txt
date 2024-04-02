@@ -1,0 +1,17 @@
+Mode: single
+Input file: /data/private/new_lib/evalverse/results/SOLAR-10.7B-Instruct-v1.0/mt_bench/model_judgment/gpt-4_single.jsonl
+
+########## First turn ##########
+                                  score
+model                     turn         
+SOLAR-10.7B-Instruct-v1.0 1     7.66875
+
+########## Second turn ##########
+                                  score
+model                     turn         
+SOLAR-10.7B-Instruct-v1.0 2     7.21519
+
+########## Average ##########
+                              score
+model                              
+SOLAR-10.7B-Instruct-v1.0  7.443396

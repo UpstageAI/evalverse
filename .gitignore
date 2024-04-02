@@ -160,7 +160,7 @@ cython_debug/
 #.idea/
 
 # Files from evalverse slack_bot
-evalverse/db/*
+db/*
 
 # Files from reproducibility test
 evalverse/tests/test_results_reproduced/*

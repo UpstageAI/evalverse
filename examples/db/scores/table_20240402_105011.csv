@@ -1,0 +1,2 @@
+Model,Ranking,total_avg,H6-ARC,H6-Hellaswag,H6-MMLU,H6-TruthfulQA,H6-Winogrande,H6-GSM8k
+SOLAR-10.7B-Instruct-v1.0,1,74.62,71.33,88.19,65.52,71.72,83.19,67.78

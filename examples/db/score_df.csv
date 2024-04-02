@@ -1,0 +1,2 @@
+Model,H6-ARC,H6-Hellaswag,H6-MMLU,H6-TruthfulQA,H6-Winogrande,H6-GSM8k,MT-Bench-Coding,MT-Bench-Extraction,MT-Bench-Humanities,MT-Bench-Math,MT-Bench-Reasoning,MT-Bench-Roleplay,MT-Bench-Stem,MT-Bench-Writing,IFEval-strict-prompt,IFEval-strict-instruction,IFEval-loose-prompt,IFEval-loose-instruction,EQ-Bench
+SOLAR-10.7B-Instruct-v1.0,71.33,88.19,65.52,71.72,83.19,67.78,44.5,77.89,98.5,43.5,66.0,82.5,88.75,94.0,51.57,57.97,56.01,62.92,70.06006445118443

@@ -109,12 +109,12 @@ Evalverse is completely freely-accessible open-source and licensed under the Apa
 If you want to cite our 🌌 Evalverse project, feel free to use the following bibtex. You can check our paper via [link](https://arxiv.org/abs/2404.00943).
 
 ```bibtex
-@misc{evalverse,
-  title = {Evalverse},
-  author = {Jihoo Kim, Wonho Song, Dahyun Kim, Yoonsoo Kim, Yungi Kim, Chanjun Park},
-  year = {2024},
-  eprint={2404.00943},
-  archivePrefix={arXiv},
-  primaryClass={cs.CL}
+@misc{kim2024evalverse,
+      title={Evalverse: Unified and Accessible Library for Large Language Model Evaluation}, 
+      author={Jihoo Kim and Wonho Song and Dahyun Kim and Yunsu Kim and Yungi Kim and Chanjun Park},
+      year={2024},
+      eprint={2404.00943},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
 }
 ```

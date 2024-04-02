@@ -134,7 +134,7 @@ We currently support four evaluation methods. If you have suggestions for new me
 
 | Evaluation                | Original Repository                        |
 |---------------------------|--------------------------------------------|
-| H6 <br> (Open LLM Leaderboard) | [EleutherAI](https://github.com/EleutherAI)/[lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness)|
+| H6 (Open LLM Leaderboard) | [EleutherAI](https://github.com/EleutherAI)/[lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness)|
 | MT-bench                  | [lm-sys](https://github.com/lm-sys)/[FastChat](https://github.com/lm-sys/FastChat)|
 | IFEval                    | [google-research](https://github.com/google-research/google-research/tree/master)/[instruction_following_eval](https://github.com/google-research/google-research/tree/master/instruction_following_eval)|
 | EQ-Bench                  | [EQ-bench](https://github.com/EQ-bench)/[EQ-Bench](https://github.com/EQ-bench/EQ-Bench)|

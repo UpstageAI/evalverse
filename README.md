@@ -19,7 +19,7 @@ Upstage Solar is powered by Evalverse! Try at Upstage [Console](https://console.
 Evalverse is a freely accessible, open-source project designed to support your LLM (Large Language Model) evaluation needs. We provide a simple, standardized, and user-friendly solution for the processing and management of LLM evaluations, catering to the needs of AI research engineers and scientists. We also support no-code evaluation processes for people who may have less experience working with LLMs. Moreover, you will receive a well-organized report with figures summarizing the evaluation results.
 
 ### With Evalverse, you are empowered to
-- access various evaluation methods without the juggling multiple libraries.
+- access various evaluation methods without juggling multiple libraries.
 - receive insightful report about the evaluation results that helps you to compare the varied scores across different models.
 - initiate evalutions and generate reports without any code via Slack bot.
 

@@ -7,7 +7,7 @@
 </picture>
 
 The Universe of Evaluation.
-All about the evaluation for LLMs.
+All about the evaluation for LLMs.  </br>
 Upstage Solar is powered by Evalverse! Try at Upstage [Console](https://console.upstage.ai/)!
 
 [Docs](https://evalverse.gitbook.io/evalverse-docs) • [Examples](https://github.com/UpstageAI/evalverse/tree/main/tutorials) • [FAQ](https://evalverse.gitbook.io/evalverse-docs/documents/faqs) • [Contribution Guide]()  • [Contact](mailto:evalverse@upstage.ai)  • [Discord]() • [Paper]()

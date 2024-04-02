@@ -1,4 +1,3 @@
-# Evalverse
 <div align="center">
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/Evalverse_White.png" width=300>
@@ -13,13 +12,30 @@ Upstage Solar is powered by Evalverse! Try at Upstage [Console](https://console.
 [Docs](https://evalverse.gitbook.io/evalverse-docs) • [Examples](https://github.com/UpstageAI/evalverse/tree/main/examples) • [FAQ](https://evalverse.gitbook.io/evalverse-docs/documents/faqs) • [Contribution Guide](https://github.com/UpstageAI/evalverse/blob/main/contribution/CONTRIBUTING.md)  • [Contact](mailto:evalverse@upstage.ai)  • [Discord](https://discord.gg/D3bBj66K) • [Paper](https://arxiv.org/abs/2404.00943)
 </div>
 
-<div align="center"><img alt="overview" src="assets/overview.png" width=500></div>
+![Overview of Evalverse](./assets/overview.png)
 
 
 ## Welcome to Evalverse!
 Evalverse is a freely accessible, open-source project designed to support your LLM (Large Language Model) evaluation needs. We provide a simple, standardized, and user-friendly solution for the processing and management of LLM evaluations, catering to the needs of AI research engineers and scientists. We also support no-code evaluation processes for people who may have less experience working with LLMs. Moreover, you will receive a well-organized report with figures summarizing the evaluation results.
+
+### With Evalverse, you are empowered to
+- access various evaluation methods without the juggling multiple libraries.
+- receive insightful report about the evaluation results that helps you to compare the varied scores across different models.
+- initiate evalutions and generate reports without any code via Slack bot.
+
+
+### Architecture of Evalverse
 <div align="center"><img alt="architecture" src="assets/architecture.png" width=700></div>
 
+### Key Features of Evalverse
+- **Unified evaluation with Submodules**: Evalverse extends its evaluation capabilities through Git submodules, effortlessly incorporating frameworks like [lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness) and [FastChat](https://github.com/lm-sys/FastChat). Swiftly add new tools and keep pace with the latest in LLM evaluation.
+- **No-code evaluation request**: With Evalverse, request LLM evaluations without any code, simply by sending `Request!` in a direct message or Slack channel with an activate Evalverse Slack bot. Enter the model name in the Huggingface hub or local model directory path in Slack, and let the bot handle the rest.
+- **LLM evaluation report**: Obtain comprehensive, no-code reports from Evalverse. Request with a simple command -`Report!`-, select the model and evaluation criteria, and receive detailed reports with scores, rankings, and visuals, all generated from the stored score database.
+
+
+If you want to know more about Dataverse, please checkout our [docs](https://evalverse.gitbook.io/evalverse-docs). </br>
+By clicking below image, it'll take you to a short intro video!
+[![Brief Introduction](./assets/intro-evalverse.png)](https://www.youtube.com/watch?v=-VviAutjpgM)
 </br>
 
 ## 🌌 Installation
@@ -57,6 +73,11 @@ SLACK_APP_TOKEN=xapp-...
 </br>
 
 ## 🌌 Quickstart
+More detailed tutorials are [here](https://github.com/UpstageAI/evalverse/tree/main/examples).
+
+- [basic_usage.ipynb](https://github.com/UpstageAI/evalverse/tree/main/examples/01_basic_usage.ipynb): Very basic usage, like how to use `Evaluator` for evaluation and `Reporter` for generating report.
+- [advanced_usage.ipynb](https://github.com/UpstageAI/evalverse/tree/main/examples/02_advanced_usage.ipynb): Introduces methods for evaluating each benchmark and all benchmarks collectively.
+
 ### 🌠 Evaluation
 #### 💫 Evaluation with Library
 The following code is a simple example to evaluate the [SOLAR-10.7B-Instruct-v1.0 model](https://huggingface.co/upstage/SOLAR-10.7B-Instruct-v1.0) on the `h6_en` ([Open LLM Leaderboard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard)) benchmark.
@@ -99,6 +120,18 @@ model_list = ["SOLAR-10.7B-Instruct-v1.0"]
 benchmark_list = ["h6_en", "mt_bench", "ifeval", "eq_bench"]
 reporter.run(model_list=model_list, benchmark_list=benchmark_list)
 ```
+
+</br>
+
+## 🌌 Supported Evaluations
+We currently support four evaluation methods. If you have suggestions for new methods, we welcome your input!
+
+| Evaluation                | Original Repository                        |
+|---------------------------|--------------------------------------------|
+| H6 <br> (Open LLM Leaderboard) | [EleutherAI](https://github.com/EleutherAI)/[lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness)|
+| MT-bench                  | [lm-sys](https://github.com/lm-sys)/[FastChat](https://github.com/lm-sys/FastChat)|
+| IFEval                    | [google-research](https://github.com/google-research/google-research/tree/master)/[instruction_following_eval](https://github.com/google-research/google-research/tree/master/instruction_following_eval)|
+| EQ-Bench                  | [EQ-bench](https://github.com/EQ-bench)/[EQ-Bench](https://github.com/EQ-bench/EQ-Bench)|
 
 </br>
 

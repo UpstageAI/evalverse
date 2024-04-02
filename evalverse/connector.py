@@ -2,9 +2,10 @@
 Copyright (c) 2024-present Upstage Co., Ltd.
 Apache-2.0 license
 """
+import json
 import os
 
-from evalverse.utils import EVALVERSE_MODULE_PATH, print_command
+from evalverse.utils import EVALVERSE_MODULE_PATH, print_command, print_txt_file
 
 
 def lm_evaluation_harness(
@@ -24,10 +25,7 @@ def lm_evaluation_harness(
 ):
     output_json_path = os.path.join(output_path, f"{tasks}_{num_fewshot}.json")
 
-    if os.path.exists(output_json_path):
-        print(f"The result already exists: {os.path.abspath(output_json_path)}")
-
-    else:
+    if not os.path.exists(output_json_path):
         if use_vllm:
             tokenizer_mode = "auto" if use_fast_tokenizer else "slow"
             eval_cmd = f"""
@@ -52,7 +50,7 @@ def lm_evaluation_harness(
                 model_args = model_args + ",load_in_4bit=True"
 
             eval_cmd = f"""
-            {hf_cmd} \
+            NCCL_P2P_DISABLE=1 {hf_cmd} \
                 --model_args {model_args}  \
                 --tasks {tasks} \
                 --batch_size {batch_size} \
@@ -61,6 +59,9 @@ def lm_evaluation_harness(
             """
         print_command(eval_cmd)
         os.system(eval_cmd)
+
+    else:
+        print(f"The result already exists: {os.path.abspath(output_json_path)}")
 
 
 def fastchat_llm_judge(
@@ -74,35 +75,38 @@ def fastchat_llm_judge(
     parallel_api=1,
     output_path="../results",
 ):
-    if baselines:
-        model_list = " ".join([model_id] + baselines.split(","))
-    else:
-        model_list = model_id
-
-    eval_code_path = os.path.join(EVALVERSE_MODULE_PATH, "submodules/FastChat/fastchat/llm_judge")
-
-    answer_path = os.path.join(output_path, model_id, "mt_bench", "model_answer")
-    answer_file = os.path.join(answer_path, f"{model_id}.jsonl")
-    judgement_path = os.path.join(output_path, model_id, "mt_bench", "model_judgment")
-    judgement_file = os.path.join(judgement_path, "gpt-4_single.jsonl")
     scores_file = os.path.join(output_path, model_id, "mt_bench", "scores.txt")
 
-    gen_answer_cmd = f"python3 gen_model_answer.py --model-path {model_path} --model-id {model_id} --bench-name {mt_bench_name} --answer-file {answer_file} --num-gpus-per-model {num_gpus_per_model} --num-gpus-total {num_gpus_total}"
-    gen_judgment_cmd = f"echo -e '\n' | python3 gen_judgment.py --model-list {model_list} --bench-name {mt_bench_name} --model-answer-dir {answer_path} --model-judgement-dir {judgement_path} --judge-model {judge_model} --parallel {parallel_api}"
-    save_result_cmd = f"python3 show_result.py --model-list {model_list} --bench-name {mt_bench_name} --judge-model {judge_model} --input-file {judgement_file} > {os.path.join(output_path, model_id, 'mt_bench', 'scores.txt')}"
-    show_result_cmd = f"python3 show_result.py --model-list {model_list} --bench-name {mt_bench_name} --judge-model {judge_model} --input-file {judgement_file}"
-
-    eval_cmd = f"cd {eval_code_path}"
-    if not os.path.exists(answer_file):
-        eval_cmd += f" && {gen_answer_cmd}"
-    if not os.path.exists(judgement_file):
-        eval_cmd += f" && {gen_judgment_cmd}"
     if not os.path.exists(scores_file):
-        eval_cmd += f" && {save_result_cmd}"
-    eval_cmd += f" && {show_result_cmd}"
+        if baselines:
+            model_list = " ".join([model_id] + baselines.split(","))
+        else:
+            model_list = model_id
 
-    print_command(eval_cmd)
-    os.system(eval_cmd)
+        eval_code_path = os.path.join(
+            EVALVERSE_MODULE_PATH, "submodules/FastChat/fastchat/llm_judge"
+        )
+        answer_path = os.path.join(output_path, model_id, "mt_bench", "model_answer")
+        answer_file = os.path.join(answer_path, f"{model_id}.jsonl")
+        judgement_path = os.path.join(output_path, model_id, "mt_bench", "model_judgment")
+        judgement_file = os.path.join(judgement_path, "gpt-4_single.jsonl")
+
+        gen_answer_cmd = f"python3 gen_model_answer.py --model-path {model_path} --model-id {model_id} --bench-name {mt_bench_name} --answer-file {answer_file} --num-gpus-per-model {num_gpus_per_model} --num-gpus-total {num_gpus_total}"
+        gen_judgment_cmd = f"echo -e '\n' | python3 gen_judgment.py --model-list {model_list} --bench-name {mt_bench_name} --model-answer-dir {answer_path} --model-judgement-dir {judgement_path} --judge-model {judge_model} --parallel {parallel_api}"
+        save_result_cmd = f"python3 show_result.py --model-list {model_list} --bench-name {mt_bench_name} --judge-model {judge_model} --input-file {judgement_file} > {os.path.join(output_path, model_id, 'mt_bench', 'scores.txt')}"
+
+        eval_cmd = f"cd {eval_code_path}"
+        if not os.path.exists(answer_file):
+            eval_cmd += f" && {gen_answer_cmd}"
+        if not os.path.exists(judgement_file):
+            eval_cmd += f" && {gen_judgment_cmd}"
+        eval_cmd += f" && {save_result_cmd}"
+        print_command(eval_cmd)
+        os.system(eval_cmd)
+    else:
+        print(f"The result already exists: {os.path.abspath(scores_file)}")
+    # print results
+    print_txt_file(scores_file)
 
 
 def instruction_following_eval(
@@ -112,18 +116,25 @@ def instruction_following_eval(
     devices="0",
     output_path="../results",
 ):
-    eval_code_path = os.path.join(os.path.join(EVALVERSE_MODULE_PATH, "submodules/IFEval"))
+    scores_file = os.path.join(output_path, model_name, "ifeval", "scores.txt")
 
-    eval_cmd = f"""
-    cd {eval_code_path} && python3 inst_eval.py \
-        --model {model_path} \
-        --model_name {model_name} \
-        --gpu_per_inst_eval {gpu_per_inst_eval} \
-        --output_path {output_path} \
-        --devices {devices}
-    """
-    print_command(eval_cmd)
-    os.system(eval_cmd)
+    if not os.path.exists(scores_file):
+        eval_code_path = os.path.join(os.path.join(EVALVERSE_MODULE_PATH, "submodules/IFEval"))
+
+        eval_cmd = f"""
+        cd {eval_code_path} && python3 inst_eval.py \
+            --model {model_path} \
+            --model_name {model_name} \
+            --gpu_per_inst_eval {gpu_per_inst_eval} \
+            --output_path {output_path} \
+            --devices {devices}
+        """
+        print_command(eval_cmd)
+        os.system(eval_cmd)
+    else:
+        print(f"The result already exists: {os.path.abspath(scores_file)}")
+    # print results
+    print_txt_file(scores_file)
 
 
 def eq_bench(
@@ -140,23 +151,32 @@ def eq_bench(
     torch_dtype="b16",  # torch dtype, [b16, f16, f32]
     output_path="../results",  # output path
 ):
-    assert gpu_per_proc == 1, "Currently only supports 1 gpu per process"
+    result_file = os.path.join(output_path, model_name, "eq_bench", "raw_results.json")
+    if not os.path.exists(result_file):
+        assert gpu_per_proc == 1, "Currently only supports 1 gpu per process"
 
-    eval_code_path = os.path.join(os.path.join(EVALVERSE_MODULE_PATH, "submodules/EQBench"))
-    single_eval_code = f"""
-    CUDA_VISIBLE_DEVICES={devices} python3 eq-bench.py --model_name {model_name} --prompt_type {prompt_type} \
-        --model_path {model_path} --quantization {quantization} --n_iterations {n_iterations} \
-        --gpu_per_proc {gpu_per_proc} --torch_dtype {torch_dtype} --output_path {output_path} \
-        --devices {devices}"""
-    if use_fast_tokenizer:
-        single_eval_code += " --use_fast_tokenizer"
-    if use_flash_attention_2:
-        single_eval_code += " --use_flash_attention_2"
-    if lora_path is not None:
-        single_eval_code += f" --lora_path {lora_path}"
+        eval_code_path = os.path.join(os.path.join(EVALVERSE_MODULE_PATH, "submodules/EQBench"))
+        single_eval_code = f"""
+        CUDA_VISIBLE_DEVICES={devices} python3 eq-bench.py --model_name {model_name} --prompt_type {prompt_type} \
+            --model_path {model_path} --quantization {quantization} --n_iterations {n_iterations} \
+            --gpu_per_proc {gpu_per_proc} --torch_dtype {torch_dtype} --output_path {output_path} \
+            --devices {devices}"""
+        if use_fast_tokenizer:
+            single_eval_code += " --use_fast_tokenizer"
+        if use_flash_attention_2:
+            single_eval_code += " --use_flash_attention_2"
+        if lora_path is not None:
+            single_eval_code += f" --lora_path {lora_path}"
 
-    eval_cmd = f"""
-    cd {eval_code_path} && {single_eval_code}
-    """
-    print_command(eval_cmd)
-    os.system(eval_cmd)
+        eval_cmd = f"""
+        cd {eval_code_path} && {single_eval_code}
+        """
+        print_command(eval_cmd)
+        os.system(eval_cmd)
+    else:
+        print(f"The result already exists: {os.path.abspath(result_file)}")
+    # print results
+    with open(result_file, "r") as f:
+        data = json.load(f)
+    result = data[list(data.keys())[0]]["iterations"]["1"]["benchmark_results_fullscale"]
+    print(json.dumps(result, indent=4))

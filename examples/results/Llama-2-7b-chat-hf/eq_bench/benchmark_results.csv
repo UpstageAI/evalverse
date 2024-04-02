@@ -1,0 +1,2 @@
+Run ID, Benchmark Completed, Prompt Format, Model Path, Lora Path, Quantization, Benchmark Score, EQ-Bench Version, Num Questions Parseable, Num Iterations, Inference Engine, Ooba Params, Download Filters, Error
+Llama-2-7b-chat-hf,2024-04-02 13:34:43,ChatML,meta-llama/Llama-2-7b-chat-hf,None,None,36.46,v2,155.0,1,transformers,none,--include ["n", "o", "n", "e"] --exclude ["n", "o", "n", "e"],

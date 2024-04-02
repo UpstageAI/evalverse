@@ -1,0 +1,17 @@
+Mode: single
+Input file: /data/private/new_lib/evalverse/results/Llama-2-7b-chat-hf/mt_bench/model_judgment/gpt-4_single.jsonl
+
+########## First turn ##########
+                         score
+model              turn       
+Llama-2-7b-chat-hf 1     7.025
+
+########## Second turn ##########
+                            score
+model              turn          
+Llama-2-7b-chat-hf 2     6.037975
+
+########## Average ##########
+                       score
+model                       
+Llama-2-7b-chat-hf  6.534591

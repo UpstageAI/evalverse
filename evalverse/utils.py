@@ -27,6 +27,12 @@ def print_command(command, only_cmd=False):
         print(cmd)
 
 
+def print_txt_file(path):
+    with open(path, "r") as file:
+        file_contents = file.read()
+        print(file_contents)
+
+
 def get_logger(log_path=None):
     logger = logging.getLogger(__name__)
     logger.setLevel(level=logging.INFO)
@@ -67,7 +73,7 @@ def get_figure(score_df, benchmarks_list, figure_path=None, save=False):
         fig.show()
 
 
-def get_h6_en_scores(exp_path, stderr=False):
+def get_h6_en_scores(exp_path, stderr=False, print_results=False):
     acc_metric = "acc,none"
     acc_norm_metric = "acc_norm,none"
     gsm8k_metrics = ["exact_match,get-answer", "exact_match,strict-match"]
@@ -78,40 +84,71 @@ def get_h6_en_scores(exp_path, stderr=False):
 
     with open(os.path.join(exp_path, "arc_challenge_25.json"), "r") as json_file:
         arc_challenge_25 = json.load(json_file)
-        arc_score = arc_challenge_25["results"]["arc_challenge"][acc_norm_metric]
+        if print_results:
+            print(
+                "ARC-Challenge (25-shot)",
+                json.dumps(arc_challenge_25["results"]["arc_challenge"], indent=4),
+            )
+        else:
+            arc_score = arc_challenge_25["results"]["arc_challenge"][acc_norm_metric]
 
     with open(os.path.join(exp_path, "hellaswag_10.json"), "r") as json_file:
         hellaswag_10 = json.load(json_file)
-        hellaswag_score = hellaswag_10["results"]["hellaswag"][acc_norm_metric]
+        if print_results:
+            print("Hellaswag (10-shot)", json.dumps(hellaswag_10["results"]["hellaswag"], indent=4))
+        else:
+            hellaswag_score = hellaswag_10["results"]["hellaswag"][acc_norm_metric]
 
     with open(os.path.join(exp_path, "mmlu_5.json"), "r") as json_file:
         mmlu_5 = json.load(json_file)
-        mmlu_score = mmlu_5["results"]["mmlu"][acc_metric]
+        if print_results:
+            print("MMLU (5-shot)", json.dumps(mmlu_5["results"]["mmlu"], indent=4))
+        else:
+            mmlu_score = mmlu_5["results"]["mmlu"][acc_metric]
 
     with open(os.path.join(exp_path, "truthfulqa_mc2_0.json"), "r") as json_file:
         truthfulqa_mc2_0 = json.load(json_file)
-        truthfulqa_score = truthfulqa_mc2_0["results"]["truthfulqa_mc2"][acc_metric]
+        if print_results:
+            print(
+                "TruthfulQA (0-shot)",
+                json.dumps(truthfulqa_mc2_0["results"]["truthfulqa_mc2"], indent=4),
+            )
+        else:
+            truthfulqa_score = truthfulqa_mc2_0["results"]["truthfulqa_mc2"][acc_metric]
 
     with open(os.path.join(exp_path, "winogrande_5.json"), "r") as json_file:
         winogrande_5 = json.load(json_file)
-        winogrande_score = winogrande_5["results"]["winogrande"][acc_metric]
+        if print_results:
+            print(
+                "Winogrande (5-shot)", json.dumps(winogrande_5["results"]["winogrande"], indent=4)
+            )
+        else:
+            winogrande_score = winogrande_5["results"]["winogrande"][acc_metric]
 
     with open(os.path.join(exp_path, "gsm8k_5.json"), "r") as json_file:
         gsm8k_5 = json.load(json_file)
-        match_key = next((key for key in gsm8k_metrics if key in gsm8k_5["results"]["gsm8k"]), None)
-        gsm8k_score = gsm8k_5["results"]["gsm8k"][match_key]
+        if print_results:
+            print("GSM8k (5-shot)", json.dumps(gsm8k_5["results"]["gsm8k"], indent=4))
+        else:
+            match_key = next(
+                (key for key in gsm8k_metrics if key in gsm8k_5["results"]["gsm8k"]), None
+            )
+            gsm8k_score = gsm8k_5["results"]["gsm8k"][match_key]
 
-    score_list = [
-        arc_score,
-        hellaswag_score,
-        mmlu_score,
-        truthfulqa_score,
-        winogrande_score,
-        gsm8k_score,
-    ]
-    score_list = list(np.round((np.array(score_list) * 100), 2))
+    if print_results:
+        pass
+    else:
+        score_list = [
+            arc_score,
+            hellaswag_score,
+            mmlu_score,
+            truthfulqa_score,
+            winogrande_score,
+            gsm8k_score,
+        ]
+        score_list = list(np.round((np.array(score_list) * 100), 2))
 
-    return score_list
+        return score_list
 
 
 def get_mt_bench_scores(model_id, question_path, judgement_path):

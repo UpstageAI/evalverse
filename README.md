@@ -101,8 +101,8 @@ Here is a CLI script that produces the same result as the above code:
 cd evalverse
 
 python3 evaluator.py \
---h6_en \
---ckpt_path upstage/SOLAR-10.7B-Instruct-v1.0
+  --h6_en \
+  --ckpt_path upstage/SOLAR-10.7B-Instruct-v1.0
 ```
 ### 🌠 Report
 Currently, generating a report is only available through the library. We will work on a Command Line Interface (CLI) version as soon as possible.

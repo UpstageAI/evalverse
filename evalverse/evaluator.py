@@ -15,7 +15,12 @@ from evalverse.connector import (
     lm_evaluation_harness,
 )
 from evalverse.reporter import AVAILABLE_BENCHMARKS
-from evalverse.utils import EVALVERSE_LOG_FORMAT, EVALVERSE_OUTPUT_PATH, get_logger
+from evalverse.utils import (
+    EVALVERSE_LOG_FORMAT,
+    EVALVERSE_OUTPUT_PATH,
+    get_h6_en_scores,
+    get_logger,
+)
 
 logging.basicConfig(format=EVALVERSE_LOG_FORMAT, datefmt="%Y-%m-%d %H:%M:%S", level=logging.INFO)
 
@@ -176,6 +181,7 @@ class Evaluator:
                 self.logger.info(
                     f"{bench_name} done! exec_time: {total_min} min for {args.ckpt_path}"
                 )
+            get_h6_en_scores(h6_en_output_path, print_results=True)
         # mt_bench (with evalverse-FastChat)
         if args.mt_bench:
             if "OPENAI_API_KEY" not in os.environ:

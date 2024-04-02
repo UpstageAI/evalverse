@@ -17,7 +17,7 @@ Upstage Solar is powered by Evalverse! Try at Upstage [Console](https://console.
 
 
 ## Welcome to Evalverse!
-Evalverse is a freely accessible, open-source project designed to support your LLM (Large Language Model) evaluation needs. We provide a simple, standardized, and user-friendly solution for the processing and management of LLM evaluations, catering to the needs of AI research engineers and scientists. Further, we support no-code evaluation processes for people who may have less experience working with LLMs.
+Evalverse is a freely accessible, open-source project designed to support your LLM (Large Language Model) evaluation needs. We provide a simple, standardized, and user-friendly solution for the processing and management of LLM evaluations, catering to the needs of AI research engineers and scientists. We also support no-code evaluation processes for people who may have less experience working with LLMs. Moreover, you will receive a well-organized report with figures summarizing the evaluation results.
 <div align="center"><img alt="architecture" src="assets/architecture.png" width=700></div>
 
 </br>
@@ -38,7 +38,7 @@ pip install -e .
 ```
 
 ### 🌠 Option 2: Install via Pypi *(WIP)*
-> **Currently, installation via Pypi is not supported. Please install Evalverse with option 1.**
+> Currently, installation via Pypi is not supported. Please install Evalverse with option 1.
 
 
 </br>
@@ -57,7 +57,8 @@ SLACK_APP_TOKEN=xapp-...
 </br>
 
 ## 🌌 Quickstart
-### 🌠 Evaluation with Library
+### 🌠 Evaluation
+#### 💫 Evaluation with Library
 The following code is a simple example to evaluate the [SOLAR-10.7B-Instruct-v1.0 model](https://huggingface.co/upstage/SOLAR-10.7B-Instruct-v1.0) on the `h6_en` ([Open LLM Leaderboard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard)) benchmark.
 
 ```python
@@ -72,7 +73,7 @@ evaluator.run(model=model, benchmark=benchmark)
 ```
 
 
-### 🌠 Evaluation with CLI
+#### 💫 Evaluation with CLI
 Here is a CLI script that produces the same result as the above code:
 
 ```bash
@@ -81,6 +82,22 @@ cd evalverse
 python3 evaluator.py \
 --h6_en \
 --ckpt_path upstage/SOLAR-10.7B-Instruct-v1.0
+```
+### 🌠 Report
+Currently, generating a report is only available through the library. We will work on a Command Line Interface (CLI) version as soon as possible.
+
+```python
+import evalverse as ev
+
+db_path = "./db"
+output_path = "./results"
+evaluator = ev.Reporter(db_path=db_path, output_path=output_path)
+
+reporter.update_db(save=True)
+
+model_list = ["SOLAR-10.7B-Instruct-v1.0"]
+benchmark_list = ["h6_en", "mt_bench", "ifeval", "eq_bench"]
+reporter.run(model_list=model_list, benchmark_list=benchmark_list)
 ```
 
 </br>
@@ -92,6 +109,7 @@ python3 evaluator.py \
 *✨* [`Upstage`](https://www.upstage.ai/) is using Evalverse for evaluating [Solar](https://console.upstage.ai/services/solar?utm_source=upstage.ai&utm_medium=referral&utm_campaign=Main+hero+Solar+card&utm_term=Try+API+for+Free&utm_content=home). </br>
 *✨* [`Upstage`](https://www.upstage.ai/) is using Evalverse for evaluating models at [Open Ko-LLM Leaderboard](https://huggingface.co/spaces/upstage/open-ko-llm-leaderboard).
 
+</br>
 
 ## 🌌 Contributors
 <a href="https://github.com/UpstageAI/evalverse/graphs/contributors">

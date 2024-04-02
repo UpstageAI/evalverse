@@ -85,6 +85,14 @@ python3 evaluator.py \
 
 </br>
 
+## 🌌 Evalverse use-case
+> If you have any use-cases of your own, please feel free to let us know. </br>We would love to hear about them and possibly feature your case.
+
+
+*✨* [`Upstage`](https://www.upstage.ai/) is using Evalverse for evaluating [Solar](https://console.upstage.ai/services/solar?utm_source=upstage.ai&utm_medium=referral&utm_campaign=Main+hero+Solar+card&utm_term=Try+API+for+Free&utm_content=home). </br>
+*✨* [`Upstage`](https://www.upstage.ai/) is using Evalverse for evaluating models at [Open Ko-LLM Leaderboard](https://huggingface.co/spaces/upstage/open-ko-llm-leaderboard).
+
+
 ## 🌌 Contributors
 <a href="https://github.com/UpstageAI/evalverse/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=UpstageAI/evalverse" />

@@ -6,6 +6,7 @@ import os
 from datetime import datetime, timedelta, timezone
 
 import pandas as pd
+from typing import Union, List
 
 from evalverse.utils import (
     EVALVERSE_DB_PATH,
@@ -130,7 +131,8 @@ class Reporter:
         else:
             pass
 
-    def run(self, model_list: list | str = "all", benchmark_list: list | str = "all", save=False):
+    def run(self, model_list: Union[List, str] = "all", benchmark_list: Union[List, str] = "all", save: bool = False):
+
         if type(model_list) == list:
             for m in model_list:
                 if m in self.model_list:

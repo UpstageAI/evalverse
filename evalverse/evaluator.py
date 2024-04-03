@@ -7,6 +7,7 @@ import os
 import time
 from argparse import ArgumentParser
 from pathlib import Path
+from typing import Union, Optional
 
 from evalverse.connector import (
     eq_bench,
@@ -139,7 +140,8 @@ class Evaluator:
 
         return args
 
-    def run(self, model: str = None, benchmark: str | list = None, **kwargs):
+    def run(self, model: Optional[str] = None, benchmark: Optional[Union[str, list]] = None, **kwargs):
+
         # update args
         args = self.get_args()
         args = self.update_args(args, model, benchmark, kwargs)

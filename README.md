@@ -21,7 +21,7 @@ Evalverse is a freely accessible, open-source project designed to support your L
 ### With Evalverse, you are empowered to
 - access various evaluation methods without juggling multiple libraries.
 - receive insightful report about the evaluation results that helps you to compare the varied scores across different models.
-- initiate evalutions and generate reports without any code via Slack bot.
+- initiate evaluation and generate reports without any code via Slack bot.
 
 
 ### Architecture of Evalverse

@@ -1,7 +1,2 @@
 Run ID, Benchmark Completed, Prompt Format, Model Path, Lora Path, Quantization, Benchmark Score, EQ-Bench Version, Num Questions Parseable, Num Iterations, Inference Engine, Ooba Params, Download Filters, Error
-SOLAR-10.7B-Instruct-v1.0,2024-03-29 00:20:50,ChatML,upstage/SOLAR-10.7B-Instruct-v1.0,None,None,70.07,v2,168.0,1,transformers,none,--include ["n", "o", "n", "e"] --exclude ["n", "o", "n", "e"],
-SOLAR-10.7B-Instruct-v1.0,2024-03-29 00:24:16,ChatML,upstage/SOLAR-10.7B-Instruct-v1.0,None,None,70.06,v2,169.0,1,transformers,none,--include ["n", "o", "n", "e"] --exclude ["n", "o", "n", "e"],
-SOLAR-10.7B-Instruct-v1.0,2024-03-29 00:39:45,ChatML,upstage/SOLAR-10.7B-Instruct-v1.0,None,None,70.06,v2,169.0,1,transformers,none,--include ["n", "o", "n", "e"] --exclude ["n", "o", "n", "e"],
-SOLAR-10.7B-Instruct-v1.0,2024-03-29 00:42:15,ChatML,upstage/SOLAR-10.7B-Instruct-v1.0,None,None,70.06,v2,169.0,1,transformers,none,--include ["n", "o", "n", "e"] --exclude ["n", "o", "n", "e"],
-SOLAR-10.7B-Instruct-v1.0,2024-03-29 00:45:09,ChatML,upstage/SOLAR-10.7B-Instruct-v1.0,None,None,70.06,v2,169.0,1,transformers,none,--include ["n", "o", "n", "e"] --exclude ["n", "o", "n", "e"],
-SOLAR-10.7B-Instruct-v1.0,2024-03-29 00:48:48,ChatML,upstage/SOLAR-10.7B-Instruct-v1.0,None,None,70.06,v2,169.0,1,transformers,none,--include ["n", "o", "n", "e"] --exclude ["n", "o", "n", "e"],
+SOLAR-10.7B-Instruct-v1.0,2024-05-09 18:17:58,Solar-v1,upstage/SOLAR-10.7B-Instruct-v1.0,None,None,72.17,v2,165.0,1,transformers,none,--include ["n", "o", "n", "e"] --exclude ["n", "o", "n", "e"],

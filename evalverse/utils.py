@@ -189,7 +189,7 @@ def get_eqbench_score(eqbench_results_json):
     final_score = data[list(data.keys())[0]]["iterations"]["1"]["benchmark_results_fullscale"][
         "final_score"
     ]
-    score_list = [final_score]
+    score_list = [round(final_score, 2)]
 
     return score_list
 

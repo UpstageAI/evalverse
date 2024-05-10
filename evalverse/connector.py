@@ -138,9 +138,9 @@ def instruction_following_eval(
 
 
 def eq_bench(
-    model_name="SOLAR-1-10.7B-dev1.0-chat1.1.3.f8-enko",  # model name for saving results
+    model_name="SOLAR-10.7B-Instruct-v1.0",  # model name for saving results
     prompt_type="ChatML",  # Chat template
-    model_path="/data/project/public/checkpoints/SOLAR-1-10.7B-dev1.0-chat1.1.3.f8-enko/",  # model path
+    model_path="upstage/SOLAR-10.7B-Instruct-v1.0",  # model path
     lora_path=None,  # lora adapter path
     quantization=None,  # quantization, [None, "8bit", "4bit"] for load_in_8bit etc.
     n_iterations=1,  # number of iterations to repeat the inference

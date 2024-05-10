@@ -9,13 +9,18 @@ The Universe of Evaluation.
 All about the evaluation for LLMs.  </br>
 Upstage Solar is powered by Evalverse! Try at Upstage [Console](https://console.upstage.ai/)!
 
-[Docs](https://evalverse.gitbook.io/evalverse-docs) • [Examples](https://github.com/UpstageAI/evalverse/tree/main/examples) • [FAQ](https://evalverse.gitbook.io/evalverse-docs/documents/faqs) • [Contribution Guide](https://github.com/UpstageAI/evalverse/blob/main/contribution/CONTRIBUTING.md)  • [Contact](mailto:evalverse@upstage.ai)  • [Discord](https://discord.gg/D3bBj66K) • [Paper](https://arxiv.org/abs/2404.00943)
+[🤗HugginFace Space](https://huggingface.co/spaces/upstage/evalverse-space) • [📚Docs](https://evalverse.gitbook.io/evalverse-docs) • [📄Paper](https://arxiv.org/abs/2404.00943) 
+
+[Examples](https://github.com/UpstageAI/evalverse/tree/main/examples) • [FAQ](https://evalverse.gitbook.io/evalverse-docs/documents/faqs) • [Contribution Guide](https://github.com/UpstageAI/evalverse/blob/main/contribution/CONTRIBUTING.md)  • [Contact](mailto:evalverse@upstage.ai)  • [Discord](https://discord.gg/D3bBj66K) 
 </div>
+
+### 🚀 Newly updated
+- [2024.05.10] LLM-Evaluation Report of Evalverse is now available on [HuggingFace Space](https://huggingface.co/spaces/upstage/evalverse-space).
 
 <div align="center"><img alt="overview" src="assets/overview.png" width=500></div>
 
 
-## Welcome to Evalverse!
+## 👋 Welcome to Evalverse!
 Evalverse is a freely accessible, open-source project designed to support your LLM (Large Language Model) evaluation needs. We provide a simple, standardized, and user-friendly solution for the processing and management of LLM evaluations, catering to the needs of AI research engineers and scientists. We also support no-code evaluation processes for people who may have less experience working with LLMs. Moreover, you will receive a well-organized report with figures summarizing the evaluation results.
 
 ### With Evalverse, you are empowered to

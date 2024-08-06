@@ -23,7 +23,7 @@ nbformat = ">=4.2.0"
 
 ### lm-evaluation-harness & Common
 lm-eval = "0.4.2"
-transformers = "4.37.2"
+transformers = "4.38.0"
 vllm = "0.3.1"
 ray = "^2.10.0"
 
